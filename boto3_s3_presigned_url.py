@@ -81,6 +81,17 @@ try:
         
     except ClientError as e:
         print(f"Error generating pre-signed URL: {e}")
+        
+    print("-------------------------------------------------------------------------------------")
+    # Generate a pre-signed URL to list an S3 object .
+    try:
+        response = s3.generate_presigned_url('list_objects_v2',
+                                                    Params={'Bucket': bucket_name,},
+                                                    ExpiresIn=3600)
+        print(f"Pre-signed URL to list buckets : {response}")
+        
+    except ClientError as e:
+        print(f"Error generating pre-signed URL: {e}")
     
 except Exception as e:
     print(f'Unexpected error: {e}')
